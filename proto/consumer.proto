@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package="proto";
+
+import "google/api/annotations.proto";
+
+service ConsumerService {
+  rpc GetConsumerList (GetConsumerListReq) returns (GetConsumerListResp) {
+    option (google.api.http) = {
+      get: "/api/v1/consumers"
+    };
+  }
+}
+
+message GetConsumerListReq {
+  string source = 1;
+  string name = 2;
+  string company = 3;
+  string group = 4;
+  int64 pageNumber = 5;
+  int64 pageSize = 6;
+  int64 all = 7;
+}
+
+message ConsumerInfo {
+  string consumerId = 1;
+  string source = 2;
+  string sourceName = 3;
+  string consumerName = 4;
+  string companyName = 5;
+  string userGroup = 6;
+  string userGroupName = 7;
+  string updateTime = 8;
+  string updateErp = 9;
+}
+
+message GetConsumerListResp {
+  repeated ConsumerInfo data = 1;
+  int64 pageNumber = 2;
+  int64 pageSize = 3;
+  int64 totalCount = 4;
+}
